@@ -1,54 +1,14 @@
 <?php
 require_once './database.php';
-require_once './config/category.php';
 global $category;
 $db = new Database();
 $top_ten = $db->hottestBooks(10);
 $latest_books = $db->newestBooks(30);
 $random_books = $db->randomBooks(30);
+require_once './header.php';
+headerBuilder("首页 | 新笔趣阁");
 ?>
 
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="keywords" content="小说,免费小说,笔趣阁,在线读,免费读" />
-    <meta name="description" content="笔趣阁" />
-    <link rel="stylesheet" type="text/css" href="/resource/semantic/semantic.min.css" />
-    <link rel="stylesheet" type="text/css" href="/resource/style.css" />
-    <script src="/resource/semantic/semantic.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <title>首页 | 新笔趣阁</title>
-</head>
-
-<body>
-<div class="ui borderless top fixed menu">
-    <div class="ui container">
-        <div class="item">
-            <h2>新笔趣阁</h2>
-        </div>
-        <a class="item" href="/">首页</a>
-        <div class="ui simple dropdown item">
-            分类
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <?php for($i = 1; $i <= 14; $i++): ?>
-                    <a class="item" href="/category/<?php echo $i; ?>"><?php echo $category[$i]; ?></a>
-                <?php endfor; ?>
-            </div>
-        </div>
-        <a class="item">排行榜</a>
-        <div class="item right">
-            <div class="ui category search item">
-                <div class="ui transparent icon input">
-                    <input class="prompt" type="text" placeholder="搜索书名" id="search">
-                    <i class="search link icon" id="search_btn"></i>
-                </div>
-                <div class="results"></div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="ui container" id="main">
     <div class="ui stackable grid">
         <div class="twelve wide column">
@@ -118,7 +78,7 @@ $random_books = $db->randomBooks(30);
                             <a href="/book/<?php echo $book['id'] ?>"><?php echo $book['title'] ?></a>
                         </td>
                         <td class="five wide left aligned">
-                            <a href="/read/<?php echo $book['chapter_id'] ?>"><?php echo $book['chapter'] ?></a>
+                            <a href="/chapter/<?php echo $book['chapter_id'] ?>"><?php echo $book['chapter'] ?></a>
                         </td>
                         <td class="two wide right aligned author"><?php echo $book['author'] ?></td>
                         <td class="one wide center aligned time"><?php echo $book['time'] ?></td>
@@ -151,24 +111,7 @@ $random_books = $db->randomBooks(30);
         </div>
     </div>
 </div>
-<script>
-    function search(text) {
-        const encodedText = encodeURIComponent(text);
-        window.location.href = `/search/${encodedText}`;
-    }
-    $(document).ready(function() {
-        $("#search").on('keypress', function(event) {
-            if(event.which === 13) {
-                const content = $(this).val();
-                search(content);
-            }
-        });
-        $("#search_btn").on("click", function() {
-            const content = $("#search").val();
-            search(content);
-        });
-    });
-</script>
-</body>
 
-</html>
+<?php
+require_once './footer.php';
+footerBuilder();

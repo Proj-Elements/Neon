@@ -1,6 +1,6 @@
 <?php
-require_once '/database.php';
-require_once '/config/category.php';
+require_once './database.php';
+require_once './config/category.php';
 global $category;
 $db = new Database();
 $top_ten = $db->hottestBooks(10);

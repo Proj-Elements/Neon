@@ -2,7 +2,7 @@
 require_once 'config/category.php';
 function headerBuilder(string $title, string $description = "笔趣阁", string $keywords = "小说,免费小说,笔趣阁,在线读,免费读"): void
 {
-    global $category;
+    global $categories;
     echo <<<HTML
 <!DOCTYPE html>
 <html lang="zh">
@@ -36,13 +36,13 @@ function headerBuilder(string $title, string $description = "笔趣阁", string 
             <i class="dropdown icon"></i>
             <div class="menu">
 HTML;
-    for ($i = 1; $i < count($category); $i++) {
-        echo '<a class="item" href="/category/' . $i . '">' . $category[$i] . '</a>';
+    for ($i = 1; $i < count($categories); $i++) {
+        echo '<a class="item" href="/category/' . $i . '">' . $categories[$i] . '</a>';
     }
     echo <<<HTML
             </div>
         </div>
-        <a class="item">排行榜</a>
+        <a class="item" href="/rank">排行榜</a>
         <div class="item right">
             <div class="ui category search item">
                 <div class="ui transparent icon input">

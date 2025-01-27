@@ -5,12 +5,10 @@ require_once 'database.php';
 require_once 'header.php';
 require_once 'footer.php';
 
-if (!isset($_GET['keyword']))
-    die();
-$keyword = $_GET['keyword'];
-$result = (new Database())->searchBook($_GET['keyword']);
+$db = new Database();
+$result = $db->hottestBooks(100);
 
-headerBuilder("“{$keyword}” 的搜索结果 | 新笔趣阁");
+headerBuilder("排行榜 | 新笔趣阁");
 ?>
 
 <div class="ui container" id="main">
@@ -18,7 +16,7 @@ headerBuilder("“{$keyword}” 的搜索结果 | 新笔趣阁");
         <thead>
             <tr>
                 <th colspan="5">
-                    “<?php echo $keyword; ?>” 的搜索结果
+                    最火一百本小说
                 </th>
             </tr>
         </thead>

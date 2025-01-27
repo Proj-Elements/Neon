@@ -1,5 +1,5 @@
 <?php
-$category = [
+$categories = [
     "未分类",
     "玄幻",
     "奇幻",

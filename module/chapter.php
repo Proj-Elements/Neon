@@ -9,6 +9,7 @@ if (!isset($_GET['id'])) die();
 $id = $_GET['id'];
 $db = new Database();
 $chapter = $db -> getChapterInfo($id);
+if($chapter == []) die();
 $file = 'data/' . $chapter['belong_id'] . '/' . $chapter['id'] . '.txt';
 if (!file_exists($file)) die();
 $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

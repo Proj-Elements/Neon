@@ -5,12 +5,13 @@ require_once 'database.php';
 require_once 'header.php';
 require_once 'footer.php';
 
-if (!isset($_GET['keyword']))
-    die();
-$keyword = $_GET['keyword'];
-$result = (new Database())->searchBook($_GET['keyword']);
+if (!isset($_GET['category'])) die();
+$category = $_GET['category'];
+if ($category < 1 || $category >= count($categories)) die();
+$db = new Database();
+$result = $db->randomBooksByCategory(50, $category);
 
-headerBuilder("“{$keyword}” 的搜索结果 | 新笔趣阁");
+headerBuilder($categories[$category] . " | 新笔趣阁");
 ?>
 
 <div class="ui container" id="main">
@@ -18,7 +19,7 @@ headerBuilder("“{$keyword}” 的搜索结果 | 新笔趣阁");
         <thead>
             <tr>
                 <th colspan="5">
-                    “<?php echo $keyword; ?>” 的搜索结果
+                    推荐五十本<?php echo $categories[$category] ?>小说
                 </th>
             </tr>
         </thead>

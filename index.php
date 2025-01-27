@@ -5,7 +5,6 @@ require_once 'database.php';
 require_once 'header.php';
 require_once 'footer.php';
 
-global $category;
 $db = new Database();
 $top_ten = $db->hottestBooks(10);
 $latest_books = $db->newestBooks(30);
@@ -55,7 +54,7 @@ headerBuilder("首页 | 新笔趣阁");
                 <tbody>
                 <?php for($i = 4; $i < 10; $i++): ?>
                     <tr>
-                        <td class="one wide center aligned category"><?php echo $category[$top_ten[$i]['category']] ?></td>
+                        <td class="one wide center aligned category"><?php echo $categories[$top_ten[$i]['category']] ?></td>
                         <td class="fourity wide left aligned">
                             <a><?php echo $top_ten[$i]['title'] ?></a>
                         </td>
@@ -78,7 +77,7 @@ headerBuilder("首页 | 新笔趣阁");
                 <tbody>
                 <?php foreach($latest_books as $book): ?>
                     <tr>
-                        <td class="one wide center aligned"><?php echo $category[$book['category']] ?></td>
+                        <td class="one wide center aligned"><?php echo $categories[$book['category']] ?></td>
                         <td class="five wide left aligned">
                             <a href="/book/<?php echo $book['id'] ?>"><?php echo $book['title'] ?></a>
                         </td>
@@ -104,7 +103,7 @@ headerBuilder("首页 | 新笔趣阁");
                 <tbody>
                 <?php foreach ($random_books as $book): ?>
                     <tr>
-                        <td class="one wide center aligned category"><?php echo $category[$book['category']] ?></td>
+                        <td class="one wide center aligned category"><?php echo $categories[$book['category']] ?></td>
                         <td class="eleven wide left aligned">
                             <a href="/book/<?php echo $book['id'] ?>"><?php echo $book['title'] ?></a>
                         </td>

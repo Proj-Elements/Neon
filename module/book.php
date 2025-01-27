@@ -9,6 +9,7 @@ if (!isset($_GET['id'])) die();
 $id = $_GET['id'];
 $db = new Database();
 $book = $db -> getBookInfo($id);
+if($book == []) die();
 $chapters = $db -> getBookChapters($id);
 
 headerBuilder("《" . $book['title'] . "》 | 新笔趣阁");

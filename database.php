@@ -87,6 +87,22 @@ class Database
     }
 
     /**
+     * 通过分类获取随机的书籍
+     * @param int $size 书籍数量
+     * @param int $category 书籍分类
+     * @return array 书籍信息
+     */
+    public function randomBooksByCategory(int $size, int $category): array
+    {
+        $result = $this->executeQuery("SELECT * FROM `neon_books` WHERE `category` = ? ORDER BY RAND() LIMIT ?", "ii", [$category, $size]);
+        $books = [];
+        if ($result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $books[] = $row;
+        return $books;
+    }
+
+    /**
      * 通过标题模糊搜索书籍
      * @param string $title 书籍标题
      * @return array 书籍信息

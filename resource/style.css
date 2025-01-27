@@ -7,6 +7,7 @@ body {
 }
 #main {
     margin-top: 6em;
+    padding-bottom: 1em !important;
     max-width: calc(100% - 30px);
     padding-left: 15px !important;
     padding-right: 15px !important
@@ -23,6 +24,7 @@ td {
 .description p{
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

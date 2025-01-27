@@ -30,7 +30,7 @@ headerBuilder("“{$keyword}” 的搜索结果 | 新笔趣阁");
                         <a href="/book/<?php echo $book['id'] ?>"><?php echo $book['title'] ?></a>
                     </td>
                     <td class="five wide left aligned">
-                        <a href="/read/<?php echo $book['chapter_id'] ?>"><?php echo $book['chapter'] ?></a>
+                        <a href="/chapter/<?php echo $book['chapter_id'] ?>"><?php echo $book['chapter'] ?></a>
                     </td>
                     <td class="one wide right aligned author"><?php echo $book['author'] ?></td>
                     <td class="two wide center aligned time"><?php echo $book['time'] ?></td>

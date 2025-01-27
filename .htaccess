@@ -1,4 +1,7 @@
 RewriteEngine On
 RewriteCond %{THE_REQUEST} \s/module/search\.php[\s?] [NC]
-RewriteRule ^ - [R=404,L]
+RewriteRule ^ - [F]
 RewriteRule ^search/(.+)$ module/search.php?keyword=$1 [L,QSA]
+RewriteCond %{THE_REQUEST} \s/module/book\.php[\s?] [NC]
+RewriteRule ^ - [F]
+RewriteRule ^book/(.+)$ module/book.php?id=$1 [L,QSA]

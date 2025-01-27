@@ -1,5 +1,5 @@
 <?php
-require_once './config/category.php';
+require_once 'config/category.php';
 function headerBuilder(string $title, string $description = "笔趣阁", string $keywords = "小说,免费小说,笔趣阁,在线读,免费读"): void
 {
     global $category;
@@ -14,7 +14,14 @@ function headerBuilder(string $title, string $description = "笔趣阁", string 
     <link rel="stylesheet" type="text/css" href="/resource/style.css" />
     <link rel="icon" href="/favicon.png">
     <script src="/resource/jquery.min.js"></script>
+    <script src="/resource/jquery.cookie.min.js"></script>
     <script src="/resource/semantic/semantic.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body);"></script>
+
     <title>$title</title>
 </head>
 <body>

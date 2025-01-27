@@ -12,6 +12,7 @@ function headerBuilder(string $title, string $description = "笔趣阁", string 
     <meta name="description" content="$description" />
     <link rel="stylesheet" type="text/css" href="/resource/semantic/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="/resource/style.css" />
+    <link rel="icon" href="/favicon.png">
     <script src="/resource/jquery.min.js"></script>
     <script src="/resource/semantic/semantic.min.js"></script>
     <title>$title</title>

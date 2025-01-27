@@ -1,5 +1,10 @@
 <?php
-require_once './database.php';
+require_once 'global.php';
+require_once 'config/category.php';
+require_once 'database.php';
+require_once 'header.php';
+require_once 'footer.php';
+
 global $category;
 $db = new Database();
 $top_ten = $db->hottestBooks(10);

@@ -6,7 +6,7 @@ require_once 'database.php';
 require_once 'config/category.php';
 
 checkLogin();
-headerBuilder('首页 | 管理后台');
+headerBuilder('index | admin');
 
 $db = new Database();
 $result = $db -> hottestBooks(50);
@@ -16,11 +16,11 @@ $result = $db -> hottestBooks(50);
         <div class="column">
             <div class="ui fluid card">
                 <div class="content">
-                    <div class="ui right floated huge header">
+                    <div class="ui right floated huge header violet">
                         <i class="icon book"></i>
                     </div>
                     <div class="header">
-                        <div class="ui huge header"><?php echo $db -> books(); ?></div>
+                        <div class="ui huge header violet"><?php echo $db -> books(); ?></div>
                     </div>
                     <div class="meta">
                         <span>已收录书籍</span>
@@ -32,11 +32,11 @@ $result = $db -> hottestBooks(50);
         <div class="column">
             <div class="ui fluid card">
                 <div class="content">
-                    <div class="ui right floated huge header">
+                    <div class="ui right floated huge header orange">
                         <i class="icon file alternate"></i>
                     </div>
                     <div class="header">
-                        <div class="ui huge header"><?php echo $db -> chapters(); ?></div>
+                        <div class="ui huge header orange"><?php echo $db -> chapters(); ?></div>
                     </div>
                     <div class="meta">
                         <span>已收录章节</span>
@@ -48,11 +48,11 @@ $result = $db -> hottestBooks(50);
         <div class="column">
             <div class="ui fluid card">
                 <div class="content">
-                    <div class="ui right floated huge header green">
+                    <div class="ui right floated huge header teal">
                         <i class="icon eye"></i>
                     </div>
                     <div class="header">
-                        <div class="ui huge header green"><?php echo $db -> readers(); ?></div>
+                        <div class="ui huge header teal"><?php echo $db -> readers(); ?></div>
                     </div>
                     <div class="meta">
                         <span>历史阅读量</span>

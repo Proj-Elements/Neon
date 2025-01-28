@@ -9,16 +9,19 @@ if (!isset($_GET['id'])) die();
 $id = $_GET['id'];
 $db = new Database();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['delete'])) {
+        $db->deleteBook($id);
+        header("Location: /admin/books");
+    }
     $serial = isset($_POST['serial']) ? 1 : 0;
     $db->updateBook($id, $_POST['title'], $_POST['cover'], $_POST['author'], $_POST['description'], $_POST['category'], $serial);
 }
 $book = $db->getBookInfo($id);
-if ($book == []) header("Location: /admin/board");
+if ($book == []) header("Location: /admin/books");
 
-headerBuilder("$id | 管理后台");
+headerBuilder("$id | admin");
 ?>
 <div class="ui container" id="main">
-
     <div class="ui stackable grid">
         <div class="column">
             <form class="ui form segment" method="POST">
@@ -97,9 +100,45 @@ headerBuilder("$id | 管理后台");
                         <label>仍在连载</label>
                     </div>
                 </div>
-                <button class="ui primary button" type="submit">保存修改</button>
+                <div>
+                    <button class="ui primary button" type="submit">
+                        <i class="icon save"></i>
+                        保存修改
+                    </button>
+                    <button class="ui button red" type="button" onclick="$('.ui.modal').modal('show');">
+                        <i class="icon trash"></i>
+                        删除书籍
+                    </button>
+                </div>
             </form>
         </div>
+    </div>
+</div>
+<div class="ui modal">
+    <div class="header">
+        书籍管理
+    </div>
+    <div class="image content">
+        <div class="ui small image">
+            <img src="<?php echo $book['cover'] ?>">
+        </div>
+        <div class="description">
+            <div class="ui header">确认删除《<?php echo $book['title'] ?>》？</div>
+            <p>这将删除与本书相关的所有章节。</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui deny button">
+            <i class="close icon"></i>
+            取消
+        </div>
+        <div class="ui negative right labeled icon button" onclick="$('#hf').submit();">
+            确认删除
+            <i class="trash icon"></i>
+        </div>
+        <form id="hf" method="POST">
+            <input type="hidden" name="delete" value="1" />
+        </form>
     </div>
 </div>
 <?php

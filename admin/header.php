@@ -44,15 +44,23 @@ function headerBuilder(string $title): void
             <i class="book icon"></i>
             书籍管理
         </a>
-        <a class="item" href="/admin/import">
+        <a class="item" href="/admin/upload">
             <i class="cloud upload icon"></i>
             导入
         </a>
-        <div class="right item">
-            <a class="ui button" href="/admin/logout">
-                <i class="icon logout"></i>
-                登出
-            </a>
+        <div class="right menu">
+            <div class="item">
+                <a class="ui primary button" href="/admin/create">
+                    <i class="icon plus"></i>
+                    新建书籍
+                </a>
+            </div>
+            <div class="item">
+                <a class="ui button" href="/admin/logout">
+                    <i class="icon logout"></i>
+                    登出
+                </a>
+            </div>
         </div>
     </div>
 </div>

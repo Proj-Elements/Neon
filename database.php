@@ -177,6 +177,33 @@ class Database
     }
 
     /**
+     * 添加新的书籍
+     * @param string $title 书籍标题
+     * @param string $cover 书籍封面 URL
+     * @param string $author 书籍作者
+     * @param string $description 书籍简介
+     * @param int $category 书籍分类
+     * @param int $serial 连载状态
+     * @return int|string 新的书籍 ID
+     */
+    public function createBook(string $title, string $cover, string $author, string $description, int $category, int $serial): int
+    {
+        $this->executeQuery("INSERT INTO `neon_books` (`title`, `cover`, `author`, `description`, `category`, `serial`) VALUES (?, ?, ?, ?, ?, ?)", "ssssii", [$title, $cover, $author, $description, $category, $serial]);
+        return $this->connection->insert_id;
+    }
+
+    /**
+     * 删除书籍
+     * @param int $id 书籍 ID
+     * @return void
+     */
+    public function deleteBook(int $id): void
+    {
+        $this->executeQuery("DELETE FROM `neon_books` WHERE `id` = ?", "i", [$id]);
+        $this->executeQuery("DELETE FROM `neon_chapters` WHERE `belong_id` = ?", "i", [$id]);
+    }
+
+    /**
      * 阅读量 +1
      * @param int $id 书籍 ID
      */

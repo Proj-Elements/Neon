@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inputPassword = $_POST['password'] ?? '';
     if (password_verify($inputPassword, $passwordHash)) {
         $_SESSION['authenticated'] = true;
-        header('Location: /admin/board'); // 重定向清除POST数据
+        header('Location: /admin/board');
         exit;
     } else {
         $error = true;

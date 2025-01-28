@@ -5,7 +5,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-CREATE TABLE `neon_articles` (
+CREATE TABLE `neon_chapters` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '标题',
     `previous` int(11) NOT NULL COMMENT '上一章的 ID',

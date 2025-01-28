@@ -138,7 +138,7 @@ class Database
      */
     public function getBookChapters(int $id): array
     {
-        $result = $this->executeQuery("SELECT * FROM `neon_articles` WHERE `belong_id` = ? ORDER BY `id` ASC", "i", [$id]);
+        $result = $this->executeQuery("SELECT * FROM `neon_chapters` WHERE `belong_id` = ? ORDER BY `id` ASC", "i", [$id]);
         $chapters = [];
         if ($result->num_rows > 0)
             while ($row = $result->fetch_assoc())
@@ -153,11 +153,80 @@ class Database
      */
     public function getChapterInfo(int $id): array
     {
-        $result = $this->executeQuery("SELECT * FROM `neon_articles` WHERE `id` = ?", "i", [$id]);
+        $result = $this->executeQuery("SELECT * FROM `neon_chapters` WHERE `id` = ?", "i", [$id]);
         $response = [];
         if ($result->num_rows != 0)
             $response = $result->fetch_assoc();
         return $response;
+    }
+
+    /**
+     * 更新书籍信息
+     * @param int $id 书籍 ID
+     * @param string $title 书籍标题
+     * @param string $cover 书籍封面 URL
+     * @param string $author 书籍作者
+     * @param string $description 书籍简介
+     * @param int $category 书籍分类
+     * @param int $serial 连载状态
+     * @return void
+     */
+    public function updateBook(int $id, string $title, string $cover, string $author, string $description, int $category, int $serial): void
+    {
+        $this->executeQuery("UPDATE `neon_books` SET `title` = ?, `cover` = ?, `author` = ?, `description` = ?, `category` = ?, `serial` = ? WHERE `id` = ?", "ssssiii", [$title, $cover, $author, $description, $category, $serial, $id]);
+    }
+
+    /**
+     * 阅读量 +1
+     * @param int $id 书籍 ID
+     */
+    public function read(int $id): void
+    {
+        $this->executeQuery("UPDATE `neon_books` SET `view` = `view` + 1 WHERE `id` = ?", "i", [$id]);
+    }
+
+    /**
+     * 获取总阅读量
+     * @return int 阅读量
+     */
+    public function readers(): int
+    {
+        $result = $this->executeQuery("SELECT SUM(`view`) AS `readers` FROM `neon_books` WHERE 1 = ?", "i", [1]);
+        return $result->fetch_assoc()["readers"];
+    }
+
+    /**
+     * 获取总书籍数量
+     * @return int 书籍数量
+     */
+    public function books(): int
+    {
+        $result = $this->executeQuery("SELECT COUNT(*) AS `books` FROM `neon_books` WHERE 1 = ?", "i", [1]);
+        return $result->fetch_assoc()["books"];
+    }
+
+    /**
+     * 获取所有书籍
+     * @return array 书籍信息
+     */
+    public function getAllBooks(): array
+    {
+        $result = $this->executeQuery("SELECT * FROM `neon_books` WHERE 1 = ?", "i", [1]);
+        $books = [];
+        if ($result->num_rows > 0)
+            while ($row = $result->fetch_assoc())
+                $books[] = $row;
+        return $books;
+    }
+
+    /**
+     * 获取总章节数量
+     * @return int 章节数量
+     */
+    public function chapters(): int
+    {
+        $result = $this->executeQuery("SELECT COUNT(*) AS `chapters` FROM `neon_chapters` WHERE 1 = ?", "i", [1]);
+        return $result->fetch_assoc()["chapters"];
     }
 
     /**

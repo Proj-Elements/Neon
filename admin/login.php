@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" type="text/css" href="/resource/semantic/semantic.min.css" />
     <script src="/resource/jquery.min.js"></script>
     <script src="/resource/semantic/semantic.min.js"></script>
-    <title>登陆 | 管理面板</title>
+    <title>登陆 | 管理后台</title>
 </head>
 <body style="height: 100vh;">
     <div class="ui middle aligned centered grid" style="height: 100vh;">

@@ -23,8 +23,8 @@ CREATE TABLE `neon_books` (
     `view` bigint(20) NOT NULL DEFAULT '0' COMMENT '阅读次数',
     `category` int(11) NOT NULL COMMENT '分类',
     `serial` tinyint(1) NOT NULL COMMENT '连载状态',
-    `chapter` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '最新章节的名称',
-    `chapter_id` int(11) NOT NULL COMMENT '最新章节的 id',
+    `chapter` text CHARACTER SET utf8 COLLATE utf8_unicode_ci COMMENT '最新章节的名称',
+    `chapter_id` int(11) DEFAULT NULL COMMENT '最新章节的 id',
     `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

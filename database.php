@@ -219,6 +219,7 @@ class Database
     public function readers(): int
     {
         $result = $this->executeQuery("SELECT SUM(`view`) AS `readers` FROM `neon_books` WHERE 1 = ?", "i", [1]);
+        if($result->num_rows == 0) return 0;
         return $result->fetch_assoc()["readers"];
     }
 

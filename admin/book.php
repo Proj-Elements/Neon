@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $book = $db->getBookInfo($id);
 if ($book == []) header("Location: /admin/books");
 
-headerBuilder("$id | admin");
+headerBuilder("$id | 管理后台");
 ?>
 <div class="ui container" id="main">
     <div class="ui stackable grid">

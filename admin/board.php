@@ -6,7 +6,7 @@ require_once 'database.php';
 require_once 'config/category.php';
 
 checkLogin();
-headerBuilder('index | admin');
+headerBuilder('首页 | 管理后台');
 
 $db = new Database();
 $result = $db -> hottestBooks(50);

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $db->createBook($_POST['title'], $_POST['cover'], $_POST['author'], $_POST['description'], $_POST['category'], $serial);
 }
 
-headerBuilder("$id | admin");
+headerBuilder("创建书籍 | 管理后台");
 ?>
 <div class="ui container" id="main">
     <div class="ui stackable grid">

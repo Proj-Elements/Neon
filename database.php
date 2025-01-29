@@ -31,7 +31,7 @@ class Database
      * @param mixed $params 参数
      * @return bool|mysqli_result 查询结果
      */
-    private function executeQuery($query, $types, $params)
+    public function executeQuery($query, $types, $params)
     {
         $request = $this->connection->prepare($query);
         $request->bind_param($types, ...$params);
@@ -39,6 +39,15 @@ class Database
         $result = $request->get_result();
         $request->close();
         return $result;
+    }
+
+    /**
+     * 获取最新插入的 ID
+     * @return int 最新插入的 ID
+     */
+    public function getInsertId()
+    {
+        return $this->connection->insert_id;
     }
 
     /**

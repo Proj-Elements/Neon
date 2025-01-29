@@ -8,8 +8,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `neon_chapters` (
     `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '标题',
-    `previous` int(11) NOT NULL COMMENT '上一章的 ID',
-    `next` int(11) NOT NULL COMMENT '下一章的 ID',
+    `previous` int(11) NOT NULL DEFAULT 0 COMMENT '上一章的 ID',
+    `next` int(11) NOT NULL DEFAULT 0 COMMENT '下一章的 ID',
     `belong` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '属于的书籍名称',
     `belong_id` int(11) NOT NULL COMMENT '属于的书籍 ID',
     PRIMARY KEY (`id`)

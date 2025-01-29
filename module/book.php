@@ -68,7 +68,9 @@ headerBuilder("《" . $book['title'] . "》 | 新笔趣阁");
             <tr>
                 <?php for ($j = 0; $j < 3; $j ++): ?>
                     <td>
+                        <?php if($i + $j < count($chapters)): ?>
                         <a href="/chapter/<?php echo $chapters[$i + $j]['id'] ?>"><?php echo $chapters[$i + $j]["title"] ?></a>
+                        <?php endif; ?>
                     </td>
                 <?php endfor; ?>
             </tr>

@@ -11,6 +11,7 @@ $db = new Database();
 $book = $db -> getBookInfo($id);
 if($book == []) die();
 $chapters = $db -> getBookChapters($id);
+$db -> read($id);
 
 headerBuilder("《" . $book['title'] . "》 | 新笔趣阁");
 ?>

@@ -13,6 +13,7 @@ if($chapter == []) die();
 $file = 'data/' . $chapter['belong_id'] . '/' . $chapter['id'] . '.txt';
 if (!file_exists($file)) die();
 $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+$db -> read($chapter['belong_id']);
 
 headerBuilder($chapter['title'] . ' | 新笔趣阁');
 ?>

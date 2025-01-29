@@ -58,7 +58,7 @@ headerBuilder("首页 | 新笔趣阁");
                     <tr>
                         <td class="one wide center aligned category"><?php echo $categories[$top_ten[$i]['category']] ?></td>
                         <td class="fourity wide left aligned">
-                            <a><?php echo $top_ten[$i]['title'] ?></a>
+                            <a href="/book/<?php echo $top_ten[$i]['id'] ?>"><?php echo $top_ten[$i]['title'] ?></a>
                         </td>
                     </tr>
                 <?php endfor; ?>

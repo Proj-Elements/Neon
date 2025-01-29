@@ -4,6 +4,9 @@ require_once 'footer.php';
 require_once '../global.php';
 require_once 'database.php';
 
+checkLogin();
+headerBuilder("上传书籍 | 管理后台");
+
 $db = new Database();
 
 $alert_type = "positive";
@@ -15,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $book_id = $_POST['book_id'];
         $belong = $db->getBookInfo($book_id)['title'];
         if (!$belong) {
-            // TODO: 页面内报错
-            die("未找到对应的书籍ID：" . $book_id);
+            $alert_type = "negative";
+            $alert_title = "书籍上传失败";
+            $alert_meta = "书籍 ID 不存在，请检查书籍 ID 是否正确。";
         } else {
             $file = $_FILES['file']['tmp_name'];
             $content = file_get_contents($file);
@@ -26,14 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mkdir($uploadDir, 0755, true);
             $existing_num = 0;
             $new_num = 0;
-            // ↑ 初始化
-            // ↓ 逻辑处理
-
             $latest_id = $db->executeQuery("SELECT `id` FROM `neon_chapters` WHERE `belong_id` = ? ORDER BY `id` DESC LIMIT 1", "i", [$book_id])->fetch_assoc();
             if ($latest_id == []) $latest_id = 0;
             else $latest_id = $latest_id['id'];
-
-
             foreach ($chapters as $chapter) {
                 preg_match('/^第\s*[\d零一二三四五六七八九十百千万\s]+章\s*(.*)/', $chapter, $matches);
                 $title = $matches[0] ?? '0';
@@ -41,10 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (trim($chapterContent) === '' || $title === '0') {
                     continue;
                 }
-
                 $existing_id = $db->executeQuery("SELECT `id` FROM `neon_chapters` WHERE `title` = ? AND `belong_id` = ?", "si", [$title, $book_id])->fetch_assoc();
                 $chapter_id = $existing_id['id'] ?? null;
-
                 if($existing_id == []) {
                     $new_num++;
                     $db -> executeQuery("INSERT INTO `neon_chapters` (`title`, `belong`, `belong_id`, `previous`) VALUES (?, ?, ?, ?)", "ssii", [$title, $belong, $book_id, $latest_id]);
@@ -70,10 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $alert_meta = "文件上传失败，请检查文件格式或大小。";
     }
 }
-
-headerBuilder("上传书籍 | 管理后台");
 ?>
-
 <div class="ui container" id="main">
     <?php if ($_SERVER['REQUEST_METHOD'] == "POST"): ?>
         <div class="ui <?php echo $alert_type; ?> message">

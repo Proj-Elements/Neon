@@ -1,0 +1,17 @@
+# 正常的 URL 重写规则
+rewrite ^/search/(.+)$ /module/search.php?keyword=$1 last;
+rewrite ^/book/(.+)$ /module/book.php?id=$1 last;
+rewrite ^/chapter/(.+)$ /module/chapter.php?id=$1 last;
+rewrite ^/category/(.+)$ /module/category.php?category=$1 last;
+rewrite ^/rank$ /module/rank.php last;
+# admin 路由重写规则
+rewrite ^/admin/board$ /admin/board.php last;
+rewrite ^/admin/book/(.+)$ /admin/book.php?id=$1 last;
+rewrite ^/admin/books$ /admin/books.php last;
+rewrite ^/admin/create$ /admin/create.php last;
+rewrite ^/admin/login$ /admin/login.php last;
+rewrite ^/admin/logout$ /admin/logout.php last;
+rewrite ^/admin/upload$ /admin/upload.php last;
+if (!-e $request_filename) {
+	return 404;
+}

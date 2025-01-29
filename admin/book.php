@@ -5,6 +5,9 @@ require_once '../global.php';
 require_once 'database.php';
 require_once 'config/category.php';
 
+checkLogin();
+headerBuilder("$id | 管理后台");
+
 if (!isset($_GET['id'])) die();
 $id = $_GET['id'];
 $db = new Database();
@@ -18,8 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $book = $db->getBookInfo($id);
 if ($book == []) header("Location: /admin/books");
-
-headerBuilder("$id | 管理后台");
 ?>
 <div class="ui container" id="main">
     <div class="ui stackable grid">

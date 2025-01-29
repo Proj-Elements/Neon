@@ -5,14 +5,15 @@ require_once '../global.php';
 require_once 'database.php';
 require_once 'config/category.php';
 
+checkLogin();
+headerBuilder("创建书籍 | 管理后台");
+
 $db = new Database();
 $id = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $serial = isset($_POST['serial']) ? 1 : 0;
     $id = $db->createBook($_POST['title'], $_POST['cover'], $_POST['author'], $_POST['description'], $_POST['category'], $serial);
 }
-
-headerBuilder("创建书籍 | 管理后台");
 ?>
 <div class="ui container" id="main">
     <div class="ui stackable grid">

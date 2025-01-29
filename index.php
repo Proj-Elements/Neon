@@ -22,20 +22,22 @@ headerBuilder("首页 | 新笔趣阁");
                     <?php for($i = 0; $i < 2; $i++): ?>
                         <div class="column">
                             <?php for($j = 0; $j < 2; $j++): ?>
-                                <div class="ui items">
-                                    <div class="item">
-                                        <a class="ui tiny rounded image" href="/book/<?php echo $top_ten[$i * 2 + $j]['id'] ?>">
-                                            <img src="<?php echo $top_ten[$i * 2 + $j]['cover'] ?>" />
-                                        </a>
-                                        <div class="content">
-                                            <a class="header" href="/book/<?php echo $top_ten[$i * 2 + $j]['id'] ?>"><?php echo $top_ten[$i * 2 + $j]['title'] ?></a>
-                                            <div class="ui divider"></div>
-                                            <div class="description">
-                                                <p><?php echo $top_ten[$i * 2 + $j]['description'] ?></p>
+                                <?php if($i * 2 + $j < count($top_ten)): ?>
+                                    <div class="ui items">
+                                        <div class="item">
+                                            <a class="ui tiny rounded image" href="/book/<?php echo $top_ten[$i * 2 + $j]['id'] ?>">
+                                                <img src="<?php echo $top_ten[$i * 2 + $j]['cover'] ?>" />
+                                            </a>
+                                            <div class="content">
+                                                <a class="header" href="/book/<?php echo $top_ten[$i * 2 + $j]['id'] ?>"><?php echo $top_ten[$i * 2 + $j]['title'] ?></a>
+                                                <div class="ui divider"></div>
+                                                <div class="description">
+                                                    <p><?php echo $top_ten[$i * 2 + $j]['description'] ?></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                             <?php endfor; ?>
                         </div>
                     <?php endfor; ?>
@@ -52,7 +54,7 @@ headerBuilder("首页 | 新笔趣阁");
                 </tr>
                 </thead>
                 <tbody>
-                <?php for($i = 4; $i < 10; $i++): ?>
+                <?php for($i = 4; $i < count($top_ten); $i++): ?>
                     <tr>
                         <td class="one wide center aligned category"><?php echo $categories[$top_ten[$i]['category']] ?></td>
                         <td class="fourity wide left aligned">

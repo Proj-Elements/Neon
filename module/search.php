@@ -1,9 +1,9 @@
 <?php
 require_once '../global.php';
-require_once 'config/category.php';
-require_once 'database.php';
-require_once 'header.php';
-require_once 'footer.php';
+require_once '../config/category.php';
+require_once '../database.php';
+require_once '../header.php';
+require_once '../footer.php';
 
 if (!isset($_GET['keyword']))
     die();

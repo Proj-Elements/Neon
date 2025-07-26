@@ -2,7 +2,7 @@
 require_once 'header.php';
 require_once 'footer.php';
 require_once '../global.php';
-require_once 'database.php';
+require_once '../database.php';
 
 checkLogin();
 headerBuilder("上传书籍 | 管理后台");

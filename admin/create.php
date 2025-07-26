@@ -2,8 +2,8 @@
 require_once 'header.php';
 require_once 'footer.php';
 require_once '../global.php';
-require_once 'database.php';
-require_once 'config/category.php';
+require_once '../database.php';
+require_once '../config/category.php';
 
 checkLogin();
 headerBuilder("创建书籍 | 管理后台");
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="header">新书已提交</div>
                         <p>分配的 ID 为：<?php echo $id ?></p>
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
                 <h2>书籍管理</h2>
                 <div class="ui divider"></div>
                 <div class="field">
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="ui fluid dropdown selection" tabindex="0">
                         <select name="category" required>
                             <?php for ($i = 0; $i < count($categories); $i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $categories[$i] ?></op>
+                                <option value="<?php echo $i ?>"><?php echo $categories[$i] ?></option>
                                 <?php endfor; ?>
                         </select>
                         <i class="dropdown icon"></i>

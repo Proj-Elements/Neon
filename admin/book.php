@@ -2,8 +2,8 @@
 require_once 'header.php';
 require_once 'footer.php';
 require_once '../global.php';
-require_once 'database.php';
-require_once 'config/category.php';
+require_once '../database.php';
+require_once '../config/category.php';
 
 checkLogin();
 headerBuilder("$id | 管理后台");
@@ -31,7 +31,7 @@ if ($book == []) header("Location: /admin/books");
                         <div class="header">修改已保存</div>
                         <p>您对书籍信息的修改已保存到数据表中。</p>
                     </div>
-                <? endif; ?>
+                <?php endif; ?>
                 <h2>书籍管理</h2>
                 <div class="ui divider"></div>
                 <div class="field">
@@ -78,7 +78,7 @@ if ($book == []) header("Location: /admin/books");
                     <div class="ui fluid dropdown selection" tabindex="0">
                         <select name="category" required>
                             <?php for ($i = 0; $i < count($categories); $i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $categories[$i] ?></op>
+                                <option value="<?php echo $i ?>"><?php echo $categories[$i] ?></option>
                                 <?php endfor; ?>
                         </select>
                         <i class="dropdown icon"></i>

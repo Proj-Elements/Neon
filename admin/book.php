@@ -2,8 +2,8 @@
 require_once 'header.php';
 require_once 'footer.php';
 require_once '../global.php';
-require_once '../database.php';
-require_once '../config/category.php';
+require_once 'database.php';
+require_once 'config/category.php';
 
 checkLogin();
 headerBuilder("$id | 管理后台");

@@ -1,15 +1,39 @@
 <?php
-require_once 'global.php';
+// Mock data for UI testing
 require_once 'config/category.php';
-require_once 'database.php';
 require_once 'header.php';
 require_once 'footer.php';
 
-$db = new Database();
-$top_ten = $db->hottestBooks(10);
-$latest_books = $db->newestBooks(30);
-$random_books = $db->randomBooks(30);
-require_once './header.php';
+// Mock book data
+$top_ten = [
+    ['id' => 1, 'title' => '斗破苍穹', 'author' => '天蚕土豆', 'category' => 1, 'cover' => 'https://via.placeholder.com/120x160/667eea/ffffff?text=斗破苍穹', 'description' => '这里是三十年河东，三十年河西，莫欺少年穷！萧炎，一个修炼废材，在机缘巧合下获得了药老师父，从此踏上了修炼之路。'],
+    ['id' => 2, 'title' => '完美世界', 'author' => '辰东', 'category' => 1, 'cover' => 'https://via.placeholder.com/120x160/f093fb/ffffff?text=完美世界', 'description' => '一粒尘可填海，一根草斩尽日月星辰，弹指间天翻地覆。群雄并起，万族林立，诸圣争霸，乱天动地。'],
+    ['id' => 3, 'title' => '遮天', 'author' => '辰东', 'category' => 1, 'cover' => 'https://via.placeholder.com/120x160/4facfe/ffffff?text=遮天', 'description' => '冰冷与黑暗并存的宇宙深处，九具庞大的龙尸拉着一口青铜古棺，亘古长存。'],
+    ['id' => 4, 'title' => '神墓', 'author' => '辰东', 'category' => 1, 'cover' => 'https://via.placeholder.com/120x160/667eea/ffffff?text=神墓', 'description' => '神魔陵园，埋葬着无数死去了的神魔，但他们并非真正的死去...'],
+    ['id' => 5, 'title' => '仙逆', 'author' => '耳根', 'category' => 4, 'cover' => 'https://via.placeholder.com/120x160/f093fb/ffffff?text=仙逆', 'description' => '顺为凡，逆为仙，只在心中一念间！是仙是凡，我王林说了才算！'],
+    ['id' => 6, 'title' => '我欲封天', 'author' => '耳根', 'category' => 4, 'cover' => 'https://via.placeholder.com/120x160/4facfe/ffffff?text=我欲封天', 'description' => '我若要有，天不可无！我若要无，天不可有！这是一个起始于第九山海的故事，一个立志封天的少年，走向巅峰的传奇。'],
+    ['id' => 7, 'title' => '求魔', 'author' => '耳根', 'category' => 4, 'cover' => 'https://via.placeholder.com/120x160/667eea/ffffff?text=求魔', 'description' => '苏铭的世界被摇动了，他眼前的天空，在这一瞬，成为了一面镜子...'],
+    ['id' => 8, 'title' => '一念永恒', 'author' => '耳根', 'category' => 4, 'cover' => 'https://via.placeholder.com/120x160/f093fb/ffffff?text=一念永恒', 'description' => '一念成沧海，一念化桑田。一念斩千魔，一念诛万仙。唯我念...永恒'],
+    ['id' => 9, 'title' => '将夜', 'author' => '猫腻', 'category' => 6, 'cover' => 'https://via.placeholder.com/120x160/4facfe/ffffff?text=将夜', 'description' => '宁缺是一个为了给自己的师父报仇而苦修的少年，意外考入最高学府书院。'],
+    ['id' => 10, 'title' => '择天记', 'author' => '猫腻', 'category' => 6, 'cover' => 'https://via.placeholder.com/120x160/667eea/ffffff?text=择天记', 'description' => '太始元年，有神石自太空飞来，分散落在人间，其中落在东土大陆的神石，上面记载着奇妙的图案。']
+];
+
+$latest_books = [
+    ['id' => 1, 'title' => '斗破苍穹', 'author' => '天蚕土豆', 'category' => 1, 'chapter_id' => 1, 'chapter' => '第2345章 终极对决', 'time' => '12:30'],
+    ['id' => 2, 'title' => '完美世界', 'author' => '辰东', 'category' => 1, 'chapter_id' => 2, 'chapter' => '第1890章 帝战', 'time' => '11:45'],
+    ['id' => 3, 'title' => '遮天', 'author' => '辰东', 'category' => 1, 'chapter_id' => 3, 'chapter' => '第3456章 仙路尽头', 'time' => '10:20'],
+    ['id' => 4, 'title' => '神墓', 'author' => '辰东', 'category' => 1, 'chapter_id' => 4, 'chapter' => '第567章 神魔复苏', 'time' => '09:15'],
+    ['id' => 5, 'title' => '仙逆', 'author' => '耳根', 'category' => 4, 'chapter_id' => 5, 'chapter' => '第2100章 逆天而行', 'time' => '08:30'],
+];
+
+$random_books = [
+    ['id' => 11, 'title' => '武动乾坤', 'author' => '天蚕土豆', 'category' => 3],
+    ['id' => 12, 'title' => '大主宰', 'author' => '天蚕土豆', 'category' => 1],
+    ['id' => 13, 'title' => '元尊', 'author' => '天蚕土豆', 'category' => 1],
+    ['id' => 14, 'title' => '万古神帝', 'author' => '飞天鱼', 'category' => 1],
+    ['id' => 15, 'title' => '帝霸', 'author' => '厌笔萧生', 'category' => 1],
+];
+
 headerBuilder("首页 | 新笔趣阁");
 ?>
 
@@ -174,5 +198,5 @@ headerBuilder("首页 | 新笔趣阁");
 </div>
 
 <?php
-require_once './footer.php';
 footerBuilder();
+?>

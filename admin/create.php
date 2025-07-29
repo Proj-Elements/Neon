@@ -4,6 +4,7 @@ require_once 'footer.php';
 require_once '../global.php';
 require_once 'database.php';
 require_once 'config/category.php';
+require_once 'utils.php';
 
 checkLogin();
 headerBuilder("创建书籍 | 管理后台");
@@ -11,20 +12,37 @@ headerBuilder("创建书籍 | 管理后台");
 $db = new Database();
 $id = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $serial = isset($_POST['serial']) ? 1 : 0;
-    $id = $db->createBook($_POST['title'], $_POST['cover'], $_POST['author'], $_POST['description'], $_POST['category'], $serial);
+    $validation = validateBookData($_POST, $categories);
+    if (!$validation['valid']) {
+        $error = $validation['error'];
+    } else {
+        $bookData = sanitizeBookData($_POST);
+        $id = $db->createBook($bookData['title'], $bookData['cover'], 
+                            $bookData['author'], $bookData['description'], 
+                            $bookData['category'], $bookData['serial']);
+        if ($id > 0) {
+            $success = true;
+        } else {
+            $error = "创建书籍失败，请重试";
+        }
+    }
 }
 ?>
 <div class="ui container" id="main">
     <div class="ui stackable grid">
         <div class="column">
             <form class="ui form segment" method="POST">
-                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($success)): ?>
                     <div class="ui positive message">
                         <div class="header">新书已提交</div>
-                        <p>分配的 ID 为：<?php echo $id ?></p>
+                        <p>分配的 ID 为：<?php echo h($id) ?></p>
                     </div>
-                <? endif; ?>
+                <?php elseif (isset($error)): ?>
+                    <div class="ui negative message">
+                        <div class="header">操作失败</div>
+                        <p><?php echo h($error) ?></p>
+                    </div>
+                <?php endif; ?>
                 <h2>书籍管理</h2>
                 <div class="ui divider"></div>
                 <div class="field">
@@ -70,16 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label>分类</label>
                     <div class="ui fluid dropdown selection" tabindex="0">
                         <select name="category" required>
-                            <?php for ($i = 0; $i < count($categories); $i++): ?>
-                                <option value="<?php echo $i ?>"><?php echo $categories[$i] ?></op>
-                                <?php endfor; ?>
+                            <?php echo generateCategoryOptions($categories); ?>
                         </select>
                         <i class="dropdown icon"></i>
                         <div class="text"></div>
                         <div class="menu transition hidden" tabindex="-1">
-                            <?php for ($i = 0; $i < count($categories); $i++): ?>
-                                <div class="item" data-value="<?php echo $i ?>"><?php echo $categories[$i] ?></div>
-                            <?php endfor; ?>
+                            <?php echo generateCategoryItems($categories); ?>
                         </div>
                     </div>
                     <script>

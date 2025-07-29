@@ -4,6 +4,7 @@ require_once 'footer.php';
 require_once '../global.php';
 require_once 'database.php';
 require_once 'config/category.php';
+require_once 'utils.php';
 
 checkLogin();
 headerBuilder('书籍列表 | 管理后台');
@@ -25,14 +26,14 @@ $result = $db->getAllBooks();
                 <tbody>
                     <?php foreach ($result as $book): ?>
                         <tr>
-                            <td class="one wide center aligned collapsing category">#<?php echo $book['id'] ?></td>
-                            <td class="one wide center aligned collapsing category"><?php echo $categories[$book['category']] ?></td>
+                            <td class="one wide center aligned collapsing category">#<?php echo h($book['id']) ?></td>
+                            <td class="one wide center aligned collapsing category"><?php echo h($categories[$book['category']]) ?></td>
                             <td class="five wide collapsing">
-                                <a href="/admin/book/<?php echo $book['id'] ?>"><?php echo $book['title'] ?></a>
+                                <a href="/admin/book/<?php echo h($book['id']) ?>"><?php echo h($book['title']) ?></a>
                             </td>
-                            <td class="five wide collapsing"><?php echo $book['chapter'] ?></td>
+                            <td class="five wide collapsing"><?php echo h($book['chapter']) ?></td>
                             <td class="one wide center aligned collapsing category"><?php echo ["已完结", "连载中"][$book['serial']] ?></td>
-                            <td class="two wide right aligned collapsing time"><?php echo $book['view'] ?> 次阅读</td>
+                            <td class="two wide right aligned collapsing time"><?php echo h($book['view']) ?> 次阅读</td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -17,6 +17,17 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #e9ecef;
+        --text-muted: #adb5bd;
+        --bg-color: #1a1a1a;
+        --bg-secondary: #2d3748;
+        --border-color: #4a5568;
+    }
+}
+
 /* Enhanced body styling */
 body {
     margin: 0;
@@ -163,6 +174,69 @@ table.ui.table thead th::before {
     box-shadow: var(--shadow-medium);
 }
 
+/* Enhanced buttons */
+.ui.button {
+    border-radius: var(--border-radius) !important;
+    transition: var(--transition) !important;
+}
+
+.ui.button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-light);
+}
+
+/* Enhanced forms */
+.ui.input input {
+    border-radius: var(--border-radius) !important;
+    transition: var(--transition) !important;
+}
+
+.ui.input input:focus {
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2) !important;
+}
+
+/* Accessibility improvements */
+*:focus {
+    outline: 2px solid var(--accent-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* Skip to content link for screen readers */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    z-index: 9999;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #000080;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --border-color: #000000;
+    }
+}
+
 /* Responsive enhancements */
 @media (max-width: 768px) {
     #main {
@@ -179,6 +253,46 @@ table.ui.table thead th::before {
     .ui.items .item {
         padding: 1em !important;
     }
+    
+    /* Mobile-specific navigation improvements */
+    .ui.menu .item {
+        min-height: 44px; /* Touch target size */
+    }
+    
+    .ui.search .prompt {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    #main {
+        margin: 0.5em;
+        padding: 0.5em !important;
+    }
+    
+    .ui.stackable.grid > .column {
+        padding: 0.5em !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .ui.menu,
+    .ui.button,
+    #search,
+    .ui.dropdown {
+        display: none !important;
+    }
+    
+    #main {
+        box-shadow: none;
+        background: white;
+    }
 }
 
 /* Loading animation for better UX */
@@ -193,6 +307,37 @@ table.ui.table thead th::before {
     }
 }
 
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
 .ui.table, .ui.segment, .ui.items {
     animation: fadeInUp 0.6s ease-out;
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
 }
